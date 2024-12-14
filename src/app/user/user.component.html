@@ -6,18 +6,13 @@
         <th>E-Mail</th>
         <th>City</th>
       </tr>
-    </tbody>
-    <tbody>
-      <tr>
-        <td>test</td>
-        <td>test</td>
-        <td>test</td>
-      </tr>
-      <tr>
-        <td>test</td>
-        <td>test</td>
-        <td>test</td>
-      </tr>
+      @for (item of (this.userService.items$ | async); track item) {
+        <tr>
+          <td>{{ item['firstName'] }} {{ item['lastName'] }}</td>
+          <td>{{ item['email'] }}</td>
+          <td>{{ item['city'] }}</td>
+        </tr>
+      }
     </tbody>
   </table>
 </mat-card>

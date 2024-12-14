@@ -43,10 +43,6 @@ export class DialogAddUserComponent {
   readonly dialogRef = inject(MatDialogRef<UserComponent>);
   @Input() firstName:string= "";
 
-  onNoClick(): void {
-    this.dialogRef.close();
-  }
-
   saveUser() {
     this.user.birthDate = this.birthDate.getTime();
     console.log('Current User is', this.user);

@@ -24,8 +24,20 @@
       }
     </mat-form-field>
   </div>
+
+  <div class="full-width">
+    <mat-form-field class="example-form-field display-unset">
+      <mat-label>E-Mail</mat-label>
+      <input [disabled]="loading" matInput type="text" [(ngModel)]="user.email">
+      @if (firstName) {
+        <button matSuffix mat-icon-button aria-label="Clear" (click)="firstName=''">
+          <mat-icon>close</mat-icon>
+        </button>
+      }
+    </mat-form-field>
+  </div>
   
-  <div class="gap-16 full-width">
+  <div class="full-width">
     <mat-form-field class="example-form-field display-unset">
       <mat-label>Enter your Birthdate</mat-label>
       <input [disabled]="loading" matInput [matDatepicker]="datepicker" [(ngModel)]="birthDate">
@@ -75,7 +87,7 @@
   </div>
   
   <mat-dialog-actions>
-    <button [disabled]="loading" mat-button (click)="onNoClick()">No Thanks</button>
+    <button [disabled]="loading" mat-button (click)="dialogRef.close()">No Thanks</button>
     <button [disabled]="loading" mat-button [mat-dialog-close]="" (click)="saveUser()">Ok</button>
   </mat-dialog-actions>
   

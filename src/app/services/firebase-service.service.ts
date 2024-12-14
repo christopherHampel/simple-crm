@@ -1,13 +1,16 @@
 import { Injectable, inject } from '@angular/core';
-import { collectionData, Firestore, collection, doc, addDoc } from '@angular/fire/firestore';
-import { User } from '../models/user.class';
+import { collectionData, Firestore, collection, doc, addDoc, onSnapshot } from '@angular/fire/firestore';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
+
 export class FirebaseServiceService {
 
   firestore = inject(Firestore);
+  items$ = collectionData(this.getUserRef());
+  items: {} = '';
+  unsub: {} = '';
 
   constructor() { }
 
@@ -27,4 +30,11 @@ export class FirebaseServiceService {
     )
   }
 
+  getUser() {
+    const unsub = onSnapshot(this.getUserRef(), (users) => {
+      users.forEach(user => {
+        console.log(user.data())
+      });
+    });
+  }
 }
