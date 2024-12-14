@@ -8,11 +8,12 @@ import { collectionData, Firestore, collection, doc, addDoc, onSnapshot } from '
 export class FirebaseServiceService {
 
   firestore = inject(Firestore);
-  items$ = collectionData(this.getUserRef());
-  items: {} = '';
-  unsub: {} = '';
-
-  constructor() { }
+  items$ = collectionData(this.getUserRef(), { idField: 'id' });
+  unsub:any;
+  
+  constructor() { 
+    console.log(this.items$);
+   }
 
   getUserRef() {
     return collection(this.firestore, 'users');
@@ -31,9 +32,11 @@ export class FirebaseServiceService {
   }
 
   getUser() {
-    const unsub = onSnapshot(this.getUserRef(), (users) => {
+    this.unsub = onSnapshot(this.getUserRef(), (users) => {
+      users:[] = [];
       users.forEach(user => {
-        console.log(user.data())
+
+        console.log(user.id)
       });
     });
   }

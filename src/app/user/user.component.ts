@@ -7,11 +7,12 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatCardModule } from '@angular/material/card';
 import { FirebaseServiceService } from '../services/firebase-service.service';
 import { AsyncPipe } from '@angular/common';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-user',
   standalone: true,
-  imports: [ MatIconModule, MatButtonModule, MatTooltipModule, MatCardModule, AsyncPipe ],
+  imports: [ MatIconModule, MatButtonModule, MatTooltipModule, MatCardModule, AsyncPipe, RouterLink ],
   templateUrl: './user.component.html',
   styleUrl: './user.component.scss'
 })
@@ -19,10 +20,11 @@ export class UserComponent implements OnInit {
 
   readonly dialog = inject(MatDialog);
 
+  users:{} = this.userService.items$
+
   constructor(public userService: FirebaseServiceService) { }
 
   ngOnInit(): void {
-    this.userService.getUser();
   }
 
   openDialog(): void {
