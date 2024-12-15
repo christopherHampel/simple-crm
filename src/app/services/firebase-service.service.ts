@@ -1,5 +1,5 @@
 import { Injectable, inject } from '@angular/core';
-import { collectionData, Firestore, collection, doc, addDoc, onSnapshot } from '@angular/fire/firestore';
+import { collectionData, Firestore, collection, doc, addDoc, getDoc } from '@angular/fire/firestore';
 
 @Injectable({
   providedIn: 'root',
@@ -9,10 +9,8 @@ export class FirebaseServiceService {
 
   firestore = inject(Firestore);
   items$ = collectionData(this.getUserRef(), { idField: 'id' });
-  unsub:any;
   
   constructor() { 
-    console.log(this.items$);
    }
 
   getUserRef() {
@@ -31,13 +29,15 @@ export class FirebaseServiceService {
     )
   }
 
-  getUser() {
-    this.unsub = onSnapshot(this.getUserRef(), (users) => {
-      users:[] = [];
-      users.forEach(user => {
-
-        console.log(user.id)
-      });
-    });
+  async getUser(id:string) {
+    const docRef = doc(this.getUserRef(), id);
+    const docSnap = await getDoc(docRef);
+    
+    if (docSnap.exists()) {
+      return docSnap.data();
+    } else {
+      console.log("No such document!");
+      return
+    }
   }
-}
+} 

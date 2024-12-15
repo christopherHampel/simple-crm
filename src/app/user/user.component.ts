@@ -25,6 +25,8 @@ export class UserComponent implements OnInit {
   constructor(public userService: FirebaseServiceService) { }
 
   ngOnInit(): void {
+    console.log(this.userService.items$);
+
   }
 
   openDialog(): void {
