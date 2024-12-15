@@ -1,0 +1,48 @@
+<section>
+    <mat-progress-bar *ngIf="loading" mode="indeterminate" class="progress-bar"></mat-progress-bar>
+  
+    <h2 mat-dialog-title>Edit Adress</h2>
+
+    
+    <div class="full-width">
+      <mat-form-field class="example-form-field display-unset">
+        <mat-label>Street + House No.</mat-label>
+        <input [disabled]="loading" matInput type="text" [(ngModel)]="user.street">
+        @if (firstName) {
+          <button matSuffix mat-icon-button aria-label="Clear" (click)="firstName=''">
+            <mat-icon>close</mat-icon>
+          </button>
+        }
+      </mat-form-field>
+    </div>
+    
+    <div class="gap-16">
+      <mat-form-field class="example-form-field">
+        <mat-label>Zip Code</mat-label>
+        <input [disabled]="loading" matInput type="text" [(ngModel)]="user.zipCode">
+        @if (firstName) {
+          <button matSuffix mat-icon-button aria-label="Clear" (click)="firstName=''">
+            <mat-icon>close</mat-icon>
+          </button>
+        }
+      </mat-form-field>
+      
+      <mat-form-field class="example-form-field">
+        <mat-label>City</mat-label>
+        <input [disabled]="loading" matInput type="text" [(ngModel)]="user.city">
+        @if (firstName) {
+          <button matSuffix mat-icon-button aria-label="Clear" (click)="firstName=''">
+            <mat-icon>close</mat-icon>
+          </button>
+        }
+      </mat-form-field>
+    </div>
+    
+    <mat-dialog-actions>
+      <button [disabled]="loading" mat-button (click)="dialogRef.close()">No Thanks</button>
+      <button [disabled]="loading" mat-button [mat-dialog-close]="" (click)="saveUser()">Ok</button>
+    </mat-dialog-actions>
+    
+  </section>
+  
+  

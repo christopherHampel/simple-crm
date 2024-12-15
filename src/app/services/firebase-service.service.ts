@@ -1,5 +1,6 @@
 import { Injectable, inject } from '@angular/core';
-import { collectionData, Firestore, collection, doc, addDoc, getDoc } from '@angular/fire/firestore';
+import { collectionData, Firestore, collection, doc, addDoc, getDoc, updateDoc } from '@angular/fire/firestore';
+import { User } from '../models/user.class';
 
 @Injectable({
   providedIn: 'root',
@@ -39,5 +40,11 @@ export class FirebaseServiceService {
       console.log("No such document!");
       return
     }
+  }
+
+  async updateUser(id:string, user: User) {
+    const userRef = doc(this.getUserRef(), id);
+
+    await updateDoc(userRef, user.toJSON());
   }
 } 
